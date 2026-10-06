@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func DoRequestMultipart(baseURL, method, path string, data map[string][]string) ([]byte, error) { // переписать под Multipart
+func DoRequestMultipart(baseURL, method, path string, data map[string][]string) ([]byte, error) {
 	var body bytes.Buffer
 	w := multipart.NewWriter(&body)
 
@@ -39,10 +39,6 @@ func DoRequestMultipart(baseURL, method, path string, data map[string][]string) 
 
 	req.Header.Set("Origin", "https://music.yandex.ru")
 	req.Header.Set("Content-Type", w.FormDataContentType())
-
-	// if method == http.MethodPost {
-	// 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	// }
 
 	client := &http.Client{Timeout: 30 * time.Second}
 

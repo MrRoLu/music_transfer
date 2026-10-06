@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func DoRequestFROM(baseURL, method, path string, data map[string][]string) ([]byte, error) { // переписать под x-www-fromencode
+func DoRequestFROM(baseURL, method, path string, data map[string][]string) ([]byte, error) { // x-www-fromencode ПРОТЕСТИРОВАТЬ
 	var body url.Values
 
 	for key, value := range data {
@@ -20,15 +20,6 @@ func DoRequestFROM(baseURL, method, path string, data map[string][]string) ([]by
 	}
 
 	// body.Add("") // добавить доп параметр в тело
-
-	// if body != nil {
-	// 	b, err := json.Marshal(body)
-	// 	if err != nil {
-	// 		log.Printf("Marshal req body: %v", err)
-	// 		return nil, fmt.Errorf("Err in marshal: %w", err)
-	// 	}
-	// 	reqBodyBites = b
-	// }
 
 	fullURL := baseURL + path
 
@@ -48,10 +39,6 @@ func DoRequestFROM(baseURL, method, path string, data map[string][]string) ([]by
 
 	req.Header.Set("Origin", "https://music.yandex.ru")
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-
-	// if method == http.MethodPost {
-	// 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	// }
 
 	client := &http.Client{Timeout: 30 * time.Second}
 

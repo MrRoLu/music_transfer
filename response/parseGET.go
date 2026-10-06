@@ -16,9 +16,9 @@ func ParsedResponseGet(raw []byte) ([]models.SongGet, error) {
 	}
 
 	// fmt.Printf("Полученные данные в Get: %v\n", len(respY.Result.Tracks))
-	testLen := len(respY.Result.Tracks) / 10 // len for test req and resp
+	testLen := len(respY.Result.Tracks) // len for test req and resp
 
-	songs := make([]models.SongGet, 0, testLen)
+	songs := make([]models.SongGet, 0, testLen) // ПОДУМАТЬ ПРО РАЗМЕР
 
 	for id, song := range respY.Result.Tracks {
 		songs = append(songs, models.SongGet{ID: song.ID, AlbumID: song.AlbumID})

@@ -46,10 +46,6 @@ func DoRequestJSON(baseURL, method, path string, query url.Values, body any) ([]
 	req.Header.Set("Origin", "https://music.yandex.ru")
 	req.Header.Set("Content-Type", "application/json")
 
-	// if method == http.MethodPost {
-	// 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	// }
-
 	client := &http.Client{Timeout: 30 * time.Second}
 
 	resp, err := client.Do(req)
