@@ -30,11 +30,11 @@ func main() {
 
 	// fmt.Printf("Songs: AName: %v Title: %v\n", *(*songs)[0].ArtistName, *(*songs)[0].Title)
 
-	right_ids, not_found_songs := apple.FindSongs(songs, *storefront, 5)
+	rightIds, notFoundSongs := apple.FindSongs(songs, *storefront, 5)
 
-	fmt.Printf("All songs: %v\nFound songs: %v\nNot found songs: %v\n", len(*songs), len(*right_ids), len(*not_found_songs))
+	fmt.Printf("All songs: %v\nFound songs: %v\nNot found songs: %v\n", len(*songs), len(*rightIds), len(*notFoundSongs))
 
-	if err := apple.AddSongs(right_ids); err != nil {
+	if err := apple.AddSongs(rightIds); err != nil {
 		fmt.Printf("Error in main Apple AddSongs: %v", err)
 		log.Print(err)
 	}

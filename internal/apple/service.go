@@ -45,8 +45,8 @@ func (s *Service) FindSongs(songs *[]models.SongYa, storefront string, limit uin
 		limit = 5
 	}
 
-	songs_id := make([]string, 0, len(*songs))
-	var songs_not_found_id []models.SongYa
+	songsId := make([]string, 0, len(*songs))
+	var songsNotFoundId []models.SongYa
 
 	const flush = 20
 
@@ -58,7 +58,7 @@ func (s *Service) FindSongs(songs *[]models.SongYa, storefront string, limit uin
 		}))
 
 		if err != nil {
-			songs_not_found_id = append(songs_not_found_id, v)
+			songsNotFoundId = append(songsNotFoundId, v)
 			// fmt.Printf("Error in Found songs apple: %v", err)
 			continue
 		}
@@ -75,42 +75,42 @@ func (s *Service) FindSongs(songs *[]models.SongYa, storefront string, limit uin
 		right_song := pickBestMatch(&v, songsApple)
 
 		if right_song == nil {
-			songs_not_found_id = append(songs_not_found_id, v)
+			songsNotFoundId = append(songsNotFoundId, v)
 			continue
 		}
 
-		songs_id = append(songs_id, (*right_song).ID)
+		songsId = append(songsId, (*right_song).ID)
 
-		if len(songs_id) >= flush {
-			err := s.AddSongs(&songs_id)
+		if len(songsId) >= flush {
+			err := s.AddSongs(&songsId)
 
 			if err != nil {
 				log.Printf("Error to add batch in library: %v\n", err)
 			} else {
-				log.Printf("To add in library compleate, score: %d\n", len(songs_id))
+				log.Printf("To add in library compleate, score: %d\n", len(songsId))
 				time.Sleep(1 * time.Minute)
 			}
 
-			songs_id = songs_id[:0]
+			songsId = songsId[:0]
 		}
 	}
 
-	return &songs_id, &songs_not_found_id
+	return &songsId, &songsNotFoundId
 
 }
 
 const pathAddSongs = "/me/library"
 const batchSize = 25
 
-func (s *Service) AddSongs(songs_id *[]string) error {
-	for i := 0; i < len(*songs_id); i += batchSize {
+func (s *Service) AddSongs(songsId *[]string) error {
+	for i := 0; i < len(*songsId); i += batchSize {
 		end := i + batchSize
 
-		if end > len(*songs_id) {
-			end = len(*songs_id)
+		if end > len(*songsId) {
+			end = len(*songsId)
 		}
 
-		batch := (*songs_id)[i:end]
+		batch := (*songsId)[i:end]
 
 		query := map[string]string{}
 
