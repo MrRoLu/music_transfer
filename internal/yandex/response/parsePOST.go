@@ -1,7 +1,7 @@
 package response
 
 import (
-	"Test_api/models"
+	"Test_api/pkg/models"
 	"encoding/json"
 	"fmt"
 )

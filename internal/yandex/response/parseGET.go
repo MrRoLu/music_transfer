@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"Test_api/models"
+	"Test_api/pkg/models"
 )
 
 func ParsedResponseGet(raw []byte) ([]models.SongGet, error) {
@@ -23,7 +23,7 @@ func ParsedResponseGet(raw []byte) ([]models.SongGet, error) {
 	for id, song := range respY.Result.Tracks {
 		songs = append(songs, models.SongGet{ID: song.ID, AlbumID: song.AlbumID})
 
-		if id > 5 {
+		if id == 4 {
 			break
 		}
 	}

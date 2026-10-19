@@ -9,6 +9,11 @@ type RespYandexPost struct {
 	} `json:"result"`
 }
 
+type SongYa struct {
+	Title      *string `json:"title"`
+	ArtistName *string `json:"artist"`
+}
+
 type Artist struct {
 	ID   *uint   `json:"id"`
 	Name *string `json:"name"`

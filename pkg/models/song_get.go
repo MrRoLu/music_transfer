@@ -5,3 +5,8 @@ type RespYandexGet struct {
 		Tracks []SongGet `json:"tracks"`
 	} `json:"result"`
 }
+
+type SongGet struct {
+	ID      *uint `json:"id"`
+	AlbumID *uint `json:"albumId"`
+}
